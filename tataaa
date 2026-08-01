@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Girlfriend Day 🩵✨</title>
+  <style>
+    /* RESET & FONT */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
+      color: #1e3a8a;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 12px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* CANVAS EFEK LOVE BERJATUHAN */
+    #heartCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* CONTAINER UTAMA */
+    .mobile-card {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      width: 100%;
+      max-width: 380px;
+      min-height: 600px;
+      border-radius: 32px;
+      box-shadow: 0 15px 35px rgba(14, 165, 233, 0.3), 0 0 20px rgba(56, 189, 248, 0.4);
+      border: 3px solid #7dd3fc;
+      padding: 24px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .page {
+      display: none;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.8) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* TYPOGRAPHY */
+    h1 {
+      color: #0284c7;
+      font-size: 1.7rem;
+      margin-bottom: 12px;
+      font-weight: 800;
+      text-shadow: 0 2px 8px rgba(56, 189, 248, 0.2);
+    }
+
+    h2 {
+      color: #0369a1;
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    p {
+      color: #334155;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0284c7;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      border: 1px solid #7dd3fc;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* BUTTONS */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+      position: relative;
+    }
+
+    button {
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 25px;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 6px 18px rgba(56, 189, 248, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #64748b;
+      box-shadow: none;
+      border: 1px solid #cbd5e1;
+      margin-top: 10px;
+    }
+
+    /* AMPLOP */
+    .envelope-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 2px dashed #38bdf8;
+      border-radius: 24px;
+      padding: 30px 15px;
+      margin: 15px 0;
+      cursor: pointer;
+      box-shadow: inset 0 0 15px rgba(56, 189, 248, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .envelope-box:hover {
+      transform: scale(1.03);
+    }
+
+    /* GRID MENU KEJUTAN */
+    .grid-menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .menu-card {
+      background: #f0f9ff;
+      border: 2px solid #bae6fd;
+      border-radius: 20px;
+      padding: 15px 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(186, 230, 253, 0.5);
+      transition: all 0.2s ease;
+    }
+
+    .menu-card:active {
+      transform: scale(0.95);
+    }
+
+    .menu-card .emoji {
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .menu-card span {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #0369a1;
+    }
+
+    /* BINGKAI FOTO UTAMA */
+    .photo-frame {
+      position: relative;
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 4px solid #bae6fd;
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.25);
+      margin-bottom: 14px;
+    }
+
+    .photo-main {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* BUKET BUNGA ESTETIK (PURE CSS & SVG) */
+    .bouquet-container {
+      position: relative;
+      width: 100%;
+      height: 230px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+      background: radial-gradient(circle, rgba(224,242,254,0.7) 0%, rgba(255,255,255,0) 75%);
+    }
+
+    .bouquet {
+      position: relative;
+      width: 160px;
+      height: 210px;
+      animation: floatBouquet 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatBouquet {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-8px) rotate(2deg); }
+    }
+
+    .flowers-group {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 120px;
+      z-index: 2;
+    }
+
+    .b-flower {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      background: radial-gradient(circle, #a5f3fc 10%, #38bdf8 60%, #0284c7 100%);
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .b-flower::after {
+      content: '🩵';
+      font-size: 1.2rem;
+    }
+
+    .f1 { top: 10px; left: 10px; transform: scale(0.9); }
+    .f2 { top: 0px; left: 51px; transform: scale(1.1); z-index: 3; }
+    .f3 { top: 10px; right: 10px; transform: scale(0.9); }
+    .f4 { top: 48px; left: 28px; transform: scale(1); z-index: 4; }
+    .f5 { top: 48px; right: 28px; transform: scale(1); z-index: 4; }
+
+    /* DEDAUNAN BUKET */
+    .b-leaf {
+      position: absolute;
+      width: 30px;
+      height: 15px;
+      background: #7dd3fc;
+      border-radius: 20px 0;
+      z-index: 1;
+    }
+
+    .l1 { top: 15px; left: -5px; transform: rotate(-30deg); }
+    .l2 { top: 15px; right: -5px; transform: rotate(120deg); }
+    .l3 { top: 60px; left: 5px; transform: rotate(-10deg); }
+    .l4 { top: 60px; right: 5px; transform: rotate(100deg); }
+
+    /* KERTAS PEMBUNGKUS BUKET (WRAPPING PAPER) */
+    .wrapper-paper {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 55px solid transparent;
+      border-right: 55px solid transparent;
+      border-top: 110px solid #e0f2fe;
+      z-index: 3;
+      filter: drop-shadow(0 6px 12px rgba(56, 189, 248, 0.25));
+    }
+
+    .wrapper-paper-inner {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 45px solid transparent;
+      border-right: 45px solid transparent;
+      border-top: 95px solid #bae6fd;
+      z-index: 3;
+    }
+
+    /* PITA BUKET */
+    .ribbon {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      font-size: 1.8rem;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.15));
+    }
+
+    /* SPARKLE KELIP-KELIP */
+    .sparkle {
+      position: absolute;
+      font-size: 0.9rem;
+      animation: sparkleAnim 1.5s infinite alternate ease-in-out;
+      z-index: 6;
+    }
+
+    .s1 { top: 5px; left: 10px; animation-delay: 0s; }
+    .s2 { top: -5px; right: 20px; animation-delay: 0.5s; }
+    .s3 { bottom: 60px; left: 15px; animation-delay: 1s; }
+
+    @keyframes sparkleAnim {
+      0% { opacity: 0.2; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* GALERI GRID FOTO KITA */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .photo-slot {
+      width: 100%;
+      height: 120px;
+      border-radius: 16px;
+      object-fit: cover;
+      border: 3px solid #bae6fd;
+      background: #f1f5f9;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    /* DESAIN KARTU SALTING */
+    .salting-card {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 2px solid #38bdf8;
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      text-align: left;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+
+    .salting-card:active {
+      transform: scale(0.97);
+    }
+
+    .salting-card .header-title {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: #0284c7;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .salting-card .secret-text {
+      display: none;
+      font-size: 0.83rem;
+      color: #334155;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed #7dd3fc;
+      line-height: 1.4;
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
+
+    .salting-card.open {
+      background: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.25);
+    }
+
+    .salting-card.open .secret-text {
+      display: block;
+    }
+
+    /* METERAN SALTING */
+    .salting-meter-container {
+      background: #e0f2fe;
+      border-radius: 15px;
+      padding: 12px 10px;
+      margin: 12px 0;
+      border: 1px solid #7dd3fc;
+    }
+
+    .meter-bar {
+      height: 12px;
+      background: #bae6fd;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+
+    .meter-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #38bdf8, #0284c7);
+      border-radius: 10px;
+      transition: width 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="heartCanvas"></canvas>
+
+  <div class="mobile-card">
+    
+    <div id="page1" class="page active">
+      <span class="badge">Happy Girlfriend Day 🩵</span>
+      <p style="font-size: 3rem; margin-bottom: 5px;">💙✨</p>
+      <h1>alooo tataaa</h1>
+      <p>ajunn adaa kejutan buat tataa hari iniii,mauu liat ndaa???</p>
+      <div class="btn-group">
+        <button onclick="nextPage('page-envelope')">Mau Banget!</button>
+        <button class="btn-secondary" id="noBtn" onmouseover="moveNoBtn()" onclick="moveNoBtn()">Gak Mau</button>
+      </div>
+    </div>
+
+    <div id="page-envelope" class="page">
+      <span class="badge">Ada Surat Spesial ✉️</span>
+      <h2>Buka Amplop Ini Yaa!</h2>
+      <div class="envelope-box" onclick="nextPage('page-letter')">
+        <p style="font-size: 4rem; margin-bottom: 10px; filter: drop-shadow(0 4px 10px rgba(56,189,248,0.4));">💌</p>
+        <p style="font-weight: 700; color: #0284c7; margin: 0;">Ketuk Amplop Untuk Membuka ✨</p>
+      </div>
+    </div>
+
+    <div id="page-letter" class="page">
+      <h2>Dear, My Favorite Person 🩵</h2>
+      
+      <div class="photo-frame">
+        <img src="https://via.placeholder.com/400x250/38bdf8/ffffff?text=Slot+Foto+Utama" class="photo-main" alt="Foto Utama">
+      </div>
+      
+      <p style="text-align: justify; font-size: 0.86rem; color: #1e3a8a;">
+        Maacii yaa udaa hadir dan menjadi bagian paling indah dalam hidup akuu,setiap momen sama kamuu selalu berhasil mengubah hari hari aku dari yang biasaa jadi luar biasaa dan penuh warnaa hehee
+      </p>
+      <p style="font-size: 0.9rem; font-weight: 800; color: #0284c7; margin-top: 8px; margin-bottom: 12px; letter-spacing: 0.3px;">
+        Happy Girlfriend Day, my gorgeous! I love you today, tomorrow, and endlessly after that. 💙
+      </p>
+      <button onclick="nextPage('page-menu')">Buka Kotak Kejutan 🎁</button>
+    </div>
+
+    <div id="page-menu" class="page">
+      <h2>Surprise Box 🎁✨</h2>
+      <p>Pilih kotak di bawah ini untuk melihat kejutannya:</p>
+      
+      <div class="grid-menu">
+        <div class="menu-card" onclick="nextPage('page-flowers')">
+          <span class="emoji">💐</span>
+          <span>Bunga Cantik</span>
+        </div>
+        <div class="menu-card" onclick="nextPage('page-reasons')">
+          <span class="emoji">🧸</span>
+          <span>Kenapa Kamu?</span>
+        </div>
+        <div class="menu-card" onclick="nextPage('page-gallery')">
+          <span class="emoji">📸</span>
+          <span>Galeri Foto</span>
+        </div>
+        <div class="menu-card" onclick="nextPage('page-music')">
+          <span class="emoji">🎵</span>
+          <span>Lagu Kita</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="page-flowers" class="page">
+      <h2>Flowers for My Beautiful Girl 🌸</h2>
+      
+      <div class="bouquet-container">
+        <div class="bouquet">
+          <div class="sparkle s1">✨</div>
+          <div class="sparkle s2">✨</div>
+          <div class="sparkle s3">🩵</div>
+          
+          <div class="flowers-group">
+            <div class="b-leaf l1"></div>
+            <div class="b-leaf l2"></div>
+            <div class="b-leaf l3"></div>
+            <div class="b-leaf l4"></div>
+            <div class="b-flower f1"></div>
+            <div class="b-flower f2"></div>
+            <div class="b-flower f3"></div>
+            <div class="b-flower f4"></div>
+            <div class="b-flower f5"></div>
+          </div>
+          
+          <div class="wrapper-paper"></div>
+          <div class="wrapper-paper-inner"></div>
+          <div class="ribbon">🎀</div>
+        </div>
+      </div>
+
+      <p style="font-size: 0.86rem; font-style: italic; color: #1e3a8a;">
+        "These flowers might eventually fade away, but my affection for you will endlessly bloom brighter and more beautiful with each passing day! 🩵"
+      </p>
+      <button class="btn-secondary" onclick="nextPage('page-menu')">⬅️ Kembali ke Menu</button>
+    </div>
+
+    <div id="page-reasons" class="page">
+      <h2>Why I Love You 🩵✨</h2>
+      <p style="font-size: 0.82rem; color: #0284c7; font-weight: 600; margin-bottom: 10px;">
+        🫣 Ketuk tiap kartu rahasia di bawah ini!
+      </p>
+
+      <div class="salting-card" onclick="toggleCard(this)">
+        <div class="header-title">
+          <span>1. Senyum Kamu 😊</span>
+          <span class="status-icon" style="font-size: 0.8rem; color: #38bdf8;">[Ketuk] 🔓</span>
+        </div>
+        <div class="secret-text">
+          ngga tau kenapaa tiap kamu senyum ituu semua masalah di hidup aku itu berasa ilangg tauu :)
+        </div>
+      </div>
+
+      <div class="salting-card" onclick="toggleCard(this)">
+        <div class="header-title">
+          <span>2. Cara Kamu Manja 🤏🏻</span>
+          <span class="status-icon" style="font-size: 0.8rem; color: #38bdf8;">[Ketuk] 🔓</span>
+        </div>
+        <div class="secret-text">
+          Sisi manja kamu itu lucuuuu bangettt iii kayaa anak kecil yang lagi pengen dimanjaaa,gemessss sukakk🤏🏻🤏🏻
+        </div>
+      </div>
+
+      <div class="salting-card" onclick="toggleCard(this)">
+        <div class="header-title">
+          <span>3. Cara Kamu Perhatian 🥹</span>
+          <span class="status-icon" style="font-size: 0.8rem; color: #38bdf8;">[Ketuk] 🔓</span>
+        </div>
+        <div class="secret-text">
+          Kadang hal kecil yang kamu lakuin aja bisa bikin aku kepikiran sehariann tauuu hehee
+        </div>
+      </div>
+
+      <div class="salting-meter-container">
+        <p id="saltingText" style="font-size: 0.78rem; font-weight: 700; color: #0369a1; margin: 0;">
+          Tingkat Salting: 0% 🫣
+        </p>
+        <div class="meter-bar">
+          <div id="saltingFill" class="meter-fill"></div>
+        </div>
+      </div>
+
+      <button class="btn-secondary" onclick="nextPage('page-menu')">⬅️ Kembali ke Menu</button>
+    </div>
+
+    <div id="page-gallery" class="page">
+      <h2>Our Precious Moments 📸</h2>
+      <p style="font-size: 0.85rem; font-weight: 600; color: #0284c7; margin-bottom: 8px;">foto foto kitaaaa</p>
+
+      <div class="photo-grid">
+        <img src="https://via.placeholder.com/150/bae6fd/0284c7?text=Foto+1" class="photo-slot" alt="Foto 1">
+        <img src="https://via.placeholder.com/150/bae6fd/0284c7?text=Foto+2" class="photo-slot" alt="Foto 2">
+        <img src="https://via.placeholder.com/150/bae6fd/0284c7?text=Foto+3" class="photo-slot" alt="Foto 3">
+        <img src="https://via.placeholder.com/150/bae6fd/0284c7?text=Foto+4" class="photo-slot" alt="Foto 4">
+      </div>
+
+      <button onclick="nextPage('page-thanks')">Halaman Akhir ❤️</button>
+      <button class="btn-secondary" onclick="nextPage('page-menu')">⬅️ Kembali ke Menu</button>
+    </div>
+
+    <div id="page-music" class="page">
+      <h2>Special Song For You 🎵</h2>
+      <div class="photo-frame" style="height: 180px;">
+        <img src="https://via.placeholder.com/400x200/0284c7/ffffff?text=Slot+Foto+Cover+Lagu" class="photo-main" alt="Cover Lagu">
+      </div>
+      <p style="font-size: 0.85rem; font-weight: bold; margin-bottom: 5px; color: #0284c7;">"You're My Favorite Song" 🎧</p>
+      <p style="font-size: 0.8rem;">Lagu ini selalu bikin aku ingat betapa beruntungnya aku punya kamu.</p>
+      
+      <button class="btn-secondary" onclick="nextPage('page-menu')">⬅️ Kembali ke Menu</button>
+    </div>
+
+    <div id="page-thanks" class="page">
+      <p style="font-size: 3.5rem; margin-bottom: 5px;">💖✨</p>
+      <h2>You are Amazing!</h2>
+      <p style="font-size: 0.88rem;">Makasih udah mau liat website sederhana ini yaa. I love you so much! 🩵</p>
+      <span class="badge" style="font-size: 0.9rem;">Happy Girlfriend Day! 🎉</span>
+    </div>
+
+  </div>
+
+  <script>
+    /* FUNGSI PINDAH HALAMAN */
+    function nextPage(pageId) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+    }
+
+    /* TOMBOL 'GAK MAU' KABUR */
+    function moveNoBtn() {
+      const btn = document.getElementById('noBtn');
+      const x = Math.random() * 120 - 60;
+      const y = Math.random() * 120 - 60;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    /* FUNGSI TOGGLE KARTU SALTING & METERAN AKURAT */
+    function toggleCard(cardElement) {
+      cardElement.classList.toggle('open');
+      
+      const openedCount = document.querySelectorAll('.salting-card.open').length;
+      const totalCount = document.querySelectorAll('.salting-card').length;
+      
+      let percent = Math.round((openedCount / totalCount) * 100);
+      document.getElementById('saltingFill').style.width = percent + '%';
+      
+      const statusTexts = [
+        "Tingkat Salting: 0% 🫣",
+        "Tingkat Salting: 33% (Mulai Salting 🫣)",
+        "Tingkat Salting: 67% (Muka Mulai Merah & Gemes 😳)",
+        "Tingkat Salting: 100% (FIX SALTING MAKSIMAL! 🫠🩵)"
+      ];
+      
+      document.getElementById('saltingText').innerText = statusTexts[openedCount];
+    }
+
+    /* ANIMASI EFEK LOVE BERJATUHAN */
+    const canvas = document.getElementById('heartCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const hearts = [];
+    const heartColors = ['#60a5fa', '#93c5fd', '#38bdf8', '#7dd3fc', '#bae6fd'];
+
+    class Heart {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = -20;
+        this.size = Math.random() * 12 + 8;
+        this.speed = Math.random() * 1.5 + 1;
+        this.opacity = Math.random() * 0.7 + 0.3;
+        this.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+        this.swing = Math.random() * 0.05;
+        this.swingCount = Math.random() * 100;
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        let topCurveHeight = this.size * 0.3;
+        ctx.moveTo(this.x, this.y + topCurveHeight);
+        ctx.bezierCurveTo(this.x, this.y, this.x - this.size / 2, this.y, this.x - this.size / 2, this.y + topCurveHeight);
+        ctx.bezierCurveTo(this.x - this.size / 2, this.y + (this.size + topCurveHeight) / 2, this.x, this.y + this.size, this.x, this.y + this.size);
+        ctx.bezierCurveTo(this.x, this.y + this.size, this.x + this.size / 2, this.y + (this.size + topCurveHeight) / 2, this.x + this.size / 2, this.y + topCurveHeight);
+        ctx.bezierCurveTo(this.x + this.size / 2, this.y, this.x, this.y, this.x, this.y + topCurveHeight);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+      update() {
+        this.y += this.speed;
+        this.swingCount += this.swing;
+        this.x += Math.sin(this.swingCount) * 0.8;
+        if (this.y > canvas.height + 20) {
+          this.reset();
+        }
+      }
+    }
+
+    for (let i = 0; i < 25; i++) {
+      hearts.push(new Heart());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hearts.forEach(heart => {
+        heart.update();
+        heart.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>
