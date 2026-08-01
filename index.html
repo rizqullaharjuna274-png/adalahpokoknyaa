@@ -26,7 +26,6 @@
       position: relative;
     }
 
-    /* CANVAS EFEK LOVE BERJATUHAN */
     #heartCanvas {
       position: fixed;
       top: 0;
@@ -37,7 +36,6 @@
       z-index: 1;
     }
 
-    /* CONTAINER UTAMA */
     .mobile-card {
       background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(10px);
@@ -71,7 +69,6 @@
       100% { opacity: 1; transform: scale(1) translateY(0); }
     }
 
-    /* TYPOGRAPHY */
     h1 {
       color: #0284c7;
       font-size: 1.7rem;
@@ -112,7 +109,6 @@
       50% { transform: scale(1.05); }
     }
 
-    /* BUTTONS */
     .btn-group {
       display: flex;
       flex-direction: column;
@@ -147,7 +143,6 @@
       margin-top: 10px;
     }
 
-    /* AMPLOP */
     .envelope-box {
       background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
       border: 2px dashed #38bdf8;
@@ -163,7 +158,6 @@
       transform: scale(1.03);
     }
 
-    /* GRID MENU KEJUTAN */
     .grid-menu {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -197,7 +191,6 @@
       color: #0369a1;
     }
 
-    /* BINGKAI FOTO UTAMA */
     .photo-frame {
       position: relative;
       width: 100%;
@@ -215,7 +208,7 @@
       display: block;
     }
 
-    /* BUKET BUNGA ESTETIK (PURE CSS & SVG) */
+    /* BUKET BUNGA ESTETIK */
     .bouquet-container {
       position: relative;
       width: 100%;
@@ -272,7 +265,6 @@
     .f4 { top: 48px; left: 28px; transform: scale(1); z-index: 4; }
     .f5 { top: 48px; right: 28px; transform: scale(1); z-index: 4; }
 
-    /* DEDAUNAN BUKET */
     .b-leaf {
       position: absolute;
       width: 30px;
@@ -287,7 +279,6 @@
     .l3 { top: 60px; left: 5px; transform: rotate(-10deg); }
     .l4 { top: 60px; right: 5px; transform: rotate(100deg); }
 
-    /* KERTAS PEMBUNGKUS BUKET (WRAPPING PAPER) */
     .wrapper-paper {
       position: absolute;
       bottom: 10px;
@@ -315,7 +306,6 @@
       z-index: 3;
     }
 
-    /* PITA BUKET */
     .ribbon {
       position: absolute;
       bottom: 50px;
@@ -326,7 +316,6 @@
       filter: drop-shadow(0 2px 5px rgba(0,0,0,0.15));
     }
 
-    /* SPARKLE KELIP-KELIP */
     .sparkle {
       position: absolute;
       font-size: 0.9rem;
@@ -343,7 +332,6 @@
       100% { opacity: 1; transform: scale(1.2); }
     }
 
-    /* GALERI GRID FOTO KITA */
     .photo-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -361,7 +349,6 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
-    /* DESAIN KARTU SALTING */
     .salting-card {
       background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
       border: 2px solid #38bdf8;
@@ -409,7 +396,6 @@
       display: block;
     }
 
-    /* METERAN SALTING */
     .salting-meter-container {
       background: #e0f2fe;
       border-radius: 15px;
@@ -446,6 +432,7 @@
 
   <div class="mobile-card">
     
+    <!-- HALAMAN 1 -->
     <div id="page1" class="page active">
       <span class="badge">Happy Girlfriend Day 🩵</span>
       <p style="font-size: 3rem; margin-bottom: 5px;">💙✨</p>
@@ -457,6 +444,7 @@
       </div>
     </div>
 
+    <!-- HALAMAN AMPLOP -->
     <div id="page-envelope" class="page">
       <span class="badge">Ada Surat Spesial ✉️</span>
       <h2>Buka Amplop Ini Yaa!</h2>
@@ -466,11 +454,12 @@
       </div>
     </div>
 
+    <!-- HALAMAN SURAT -->
     <div id="page-letter" class="page">
       <h2>Dear, My Favorite Person 🩵</h2>
       
       <div class="photo-frame">
-        <img src="https://via.placeholder.com/400x250/38bdf8/ffffff?text=Slot+Foto+Utama" class="photo-main" alt="Foto Utama">
+        <img src="momen5.jpeg" class="photo-main" alt="Foto Utama">
       </div>
       
       <p style="text-align: justify; font-size: 0.86rem; color: #1e3a8a;">
@@ -482,6 +471,7 @@
       <button onclick="nextPage('page-menu')">Buka Kotak Kejutan 🎁</button>
     </div>
 
+    <!-- HALAMAN MENU KEJUTAN -->
     <div id="page-menu" class="page">
       <h2>Surprise Box 🎁✨</h2>
       <p>Pilih kotak di bawah ini untuk melihat kejutannya:</p>
@@ -506,6 +496,7 @@
       </div>
     </div>
 
+    <!-- SUB-HALAMAN BUKET BUNGA -->
     <div id="page-flowers" class="page">
       <h2>Flowers for My Beautiful Girl 🌸</h2>
       
@@ -539,6 +530,7 @@
       <button class="btn-secondary" onclick="nextPage('page-menu')">⬅️ Kembali ke Menu</button>
     </div>
 
+    <!-- SUB-HALAMAN REASONS -->
     <div id="page-reasons" class="page">
       <h2>Why I Love You 🩵✨</h2>
       <p style="font-size: 0.82rem; color: #0284c7; font-weight: 600; margin-bottom: 10px;">
@@ -587,25 +579,27 @@
       <button class="btn-secondary" onclick="nextPage('page-menu')">⬅️ Kembali ke Menu</button>
     </div>
 
+    <!-- SUB-HALAMAN GALERI -->
     <div id="page-gallery" class="page">
       <h2>Our Precious Moments 📸</h2>
       <p style="font-size: 0.85rem; font-weight: 600; color: #0284c7; margin-bottom: 8px;">foto foto kitaaaa</p>
 
       <div class="photo-grid">
-        <img src="https://via.placeholder.com/150/bae6fd/0284c7?text=Foto+1" class="photo-slot" alt="Foto 1">
-        <img src="https://via.placeholder.com/150/bae6fd/0284c7?text=Foto+2" class="photo-slot" alt="Foto 2">
-        <img src="https://via.placeholder.com/150/bae6fd/0284c7?text=Foto+3" class="photo-slot" alt="Foto 3">
-        <img src="https://via.placeholder.com/150/bae6fd/0284c7?text=Foto+4" class="photo-slot" alt="Foto 4">
+        <img src="momen1.jpeg" class="photo-slot" alt="Foto 1">
+        <img src="Momen2.jpeg" class="photo-slot" alt="Foto 2">
+        <img src="momen3.jpeg" class="photo-slot" alt="Foto 3">
+        <img src="momen4.jpeg" class="photo-slot" alt="Foto 4">
       </div>
 
       <button onclick="nextPage('page-thanks')">Halaman Akhir ❤️</button>
       <button class="btn-secondary" onclick="nextPage('page-menu')">⬅️ Kembali ke Menu</button>
     </div>
 
+    <!-- SUB-HALAMAN LAGU -->
     <div id="page-music" class="page">
       <h2>Special Song For You 🎵</h2>
       <div class="photo-frame" style="height: 180px;">
-        <img src="https://via.placeholder.com/400x200/0284c7/ffffff?text=Slot+Foto+Cover+Lagu" class="photo-main" alt="Cover Lagu">
+        <img src="musik (2).png" class="photo-main" alt="Cover Lagu">
       </div>
       <p style="font-size: 0.85rem; font-weight: bold; margin-bottom: 5px; color: #0284c7;">"You're My Favorite Song" 🎧</p>
       <p style="font-size: 0.8rem;">Lagu ini selalu bikin aku ingat betapa beruntungnya aku punya kamu.</p>
@@ -613,6 +607,7 @@
       <button class="btn-secondary" onclick="nextPage('page-menu')">⬅️ Kembali ke Menu</button>
     </div>
 
+    <!-- HALAMAN PENUTUP -->
     <div id="page-thanks" class="page">
       <p style="font-size: 3.5rem; margin-bottom: 5px;">💖✨</p>
       <h2>You are Amazing!</h2>
@@ -623,14 +618,12 @@
   </div>
 
   <script>
-    /* FUNGSI PINDAH HALAMAN */
     function nextPage(pageId) {
       const pages = document.querySelectorAll('.page');
       pages.forEach(page => page.classList.remove('active'));
       document.getElementById(pageId).classList.add('active');
     }
 
-    /* TOMBOL 'GAK MAU' KABUR */
     function moveNoBtn() {
       const btn = document.getElementById('noBtn');
       const x = Math.random() * 120 - 60;
@@ -638,14 +631,10 @@
       btn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
-    /* FUNGSI TOGGLE KARTU SALTING & METERAN AKURAT */
     function toggleCard(cardElement) {
       cardElement.classList.toggle('open');
-      
       const openedCount = document.querySelectorAll('.salting-card.open').length;
-      const totalCount = document.querySelectorAll('.salting-card').length;
-      
-      let percent = Math.round((openedCount / totalCount) * 100);
+      let percent = Math.round((openedCount / 3) * 100);
       document.getElementById('saltingFill').style.width = percent + '%';
       
       const statusTexts = [
@@ -654,11 +643,9 @@
         "Tingkat Salting: 67% (Muka Mulai Merah & Gemes 😳)",
         "Tingkat Salting: 100% (FIX SALTING MAKSIMAL! 🫠🩵)"
       ];
-      
       document.getElementById('saltingText').innerText = statusTexts[openedCount];
     }
 
-    /* ANIMASI EFEK LOVE BERJATUHAN */
     const canvas = document.getElementById('heartCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -673,9 +660,7 @@
     const heartColors = ['#60a5fa', '#93c5fd', '#38bdf8', '#7dd3fc', '#bae6fd'];
 
     class Heart {
-      constructor() {
-        this.reset();
-      }
+      constructor() { this.reset(); }
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = -20;
@@ -705,15 +690,11 @@
         this.y += this.speed;
         this.swingCount += this.swing;
         this.x += Math.sin(this.swingCount) * 0.8;
-        if (this.y > canvas.height + 20) {
-          this.reset();
-        }
+        if (this.y > canvas.height + 20) { this.reset(); }
       }
     }
 
-    for (let i = 0; i < 25; i++) {
-      hearts.push(new Heart());
-    }
+    for (let i = 0; i < 25; i++) { hearts.push(new Heart()); }
 
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
