@@ -36,12 +36,12 @@
       z-index: 1;
     }
 
+    /* CONTAINER UTAMA */
     .mobile-card {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(10px);
       width: 100%;
       max-width: 380px;
-      min-height: 600px;
       border-radius: 32px;
       box-shadow: 0 15px 35px rgba(14, 165, 233, 0.3), 0 0 20px rgba(56, 189, 248, 0.4);
       border: 3px solid #7dd3fc;
@@ -53,6 +53,7 @@
       flex-direction: column;
       justify-content: center;
       overflow: hidden;
+      transition: all 0.3s ease;
     }
 
     .page {
@@ -191,21 +192,28 @@
       color: #0369a1;
     }
 
+    /* BINGKAI FOTO OTOMATIS */
     .photo-frame {
       position: relative;
       width: 100%;
+      height: auto;
       border-radius: 20px;
       overflow: hidden;
       border: 4px solid #bae6fd;
       box-shadow: 0 8px 20px rgba(56, 189, 248, 0.25);
       margin-bottom: 14px;
+      background-color: #f0f9ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .photo-main {
       width: 100%;
-      height: 200px;
-      object-fit: cover;
+      height: auto;
+      max-height: 70vh;
       display: block;
+      object-fit: contain;
     }
 
     /* BUKET BUNGA ESTETIK */
@@ -332,21 +340,31 @@
       100% { opacity: 1; transform: scale(1.2); }
     }
 
+    /* GALERI FOTO */
     .photo-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       margin: 15px 0;
     }
 
-    .photo-slot {
+    .photo-slot-wrapper {
       width: 100%;
-      height: 120px;
-      border-radius: 16px;
-      object-fit: cover;
+      aspect-ratio: 1 / 1;
+      border-radius: 14px;
+      overflow: hidden;
       border: 3px solid #bae6fd;
       background: #f1f5f9;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .photo-slot-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .salting-card {
@@ -459,7 +477,7 @@
       <h2>Dear, My Favorite Person 🩵</h2>
       
       <div class="photo-frame">
-        <img src="momen5.jpeg" class="photo-main" alt="Foto Utama">
+        <img src="momen1.jpeg" class="photo-main" alt="Foto Utama">
       </div>
       
       <p style="text-align: justify; font-size: 0.86rem; color: #1e3a8a;">
@@ -585,20 +603,28 @@
       <p style="font-size: 0.85rem; font-weight: 600; color: #0284c7; margin-bottom: 8px;">foto foto kitaaaa</p>
 
       <div class="photo-grid">
-        <img src="momen1.jpeg" class="photo-slot" alt="Foto 1">
-        <img src="Momen2.jpeg" class="photo-slot" alt="Foto 2">
-        <img src="momen3.jpeg" class="photo-slot" alt="Foto 3">
-        <img src="momen4.jpeg" class="photo-slot" alt="Foto 4">
+        <div class="photo-slot-wrapper">
+          <img src="momen1.jpeg" alt="Foto 1">
+        </div>
+        <div class="photo-slot-wrapper">
+          <img src="Momen2.jpeg" alt="Foto 2">
+        </div>
+        <div class="photo-slot-wrapper">
+          <img src="momen3.jpeg" alt="Foto 3">
+        </div>
+        <div class="photo-slot-wrapper">
+          <img src="momen5.jpeg" alt="Foto 5">
+        </div>
       </div>
 
-      <button onclick="nextPage('page-thanks')">Halaman Akhir ❤️</button>
+      <button onclick="nextPage('page-thanks')" style="margin-top: 10px;">Halaman Akhir ❤️</button>
       <button class="btn-secondary" onclick="nextPage('page-menu')">⬅️ Kembali ke Menu</button>
     </div>
 
     <!-- SUB-HALAMAN LAGU -->
     <div id="page-music" class="page">
       <h2>Special Song For You 🎵</h2>
-      <div class="photo-frame" style="height: 180px;">
+      <div class="photo-frame">
         <img src="musik (2).png" class="photo-main" alt="Cover Lagu">
       </div>
       <p style="font-size: 0.85rem; font-weight: bold; margin-bottom: 5px; color: #0284c7;">"You're My Favorite Song" 🎧</p>
@@ -607,11 +633,13 @@
       <button class="btn-secondary" onclick="nextPage('page-menu')">⬅️ Kembali ke Menu</button>
     </div>
 
-    <!-- HALAMAN PENUTUP -->
+    <!-- HALAMAN PENUTUP (SUDAH DIREVISI) -->
     <div id="page-thanks" class="page">
       <p style="font-size: 3.5rem; margin-bottom: 5px;">💖✨</p>
       <h2>You are Amazing!</h2>
-      <p style="font-size: 0.88rem;">Makasih udah mau liat website sederhana ini yaa. I love you so much! 🩵</p>
+      <p style="font-size: 0.9rem; line-height: 1.6; color: #1e3a8a; font-weight: 600; margin: 15px 0;">
+        maaciii yaaa udaa mau liat web inii,maapp yaaa aku nggaa bikinin kamu jj kayaa orang orangg :)
+      </p>
       <span class="badge" style="font-size: 0.9rem;">Happy Girlfriend Day! 🎉</span>
     </div>
 
